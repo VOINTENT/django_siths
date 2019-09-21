@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib import admin
 
 from .models import Recruit, Planet, Test_h_s, Question, Answer, Sith
 
@@ -29,7 +28,7 @@ class QuestionAdmin(admin.ModelAdmin):
 #     list_display = ('name', 'planet', 'age', 'email', 'is_passed', 'is_h_s', )
 #     list_display_links = ('name', )
 #     search_fields = ('name', )
-
+#
 # class AnswerAdmin(admin.ModelAdmin):
 #     list_display = ('question', 'answer', 'recruit', )
 #     list_display_links = ('question', 'answer', )
