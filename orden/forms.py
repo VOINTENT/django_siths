@@ -13,12 +13,14 @@ class RecruitForm(ModelForm):
 
 
 # Набор форм с вопросами и фариантами ответов
-AnswerFormSet = modelformset_factory(
-    Answer,
-    fields = ('question', 'answer', ),
-    extra = Question.objects.count(),
-    widgets = {'question': HiddenInput()}
-)
+def get_afs():
+    AnswerFormSet = modelformset_factory(
+        Answer,
+        fields = ('question', 'answer', ),
+        extra = Question.objects.count(),
+        widgets = {'question': HiddenInput()}
+    )
+    return AnswerFormSet
 
 
 class RecruitFormUpdate(Form):

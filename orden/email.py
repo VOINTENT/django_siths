@@ -5,7 +5,7 @@ con = get_connection()
 def send_message(email):
     try:
         con.open()
-        em = EmailMessage(subject='Test', body='Test', to=[email])
+        em = EmailMessage(subject='Поздравляем', body='Вы назначены на должность руки тьмы', to=[email])
         em.send()
         conn.close()
     except OSError:

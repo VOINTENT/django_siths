@@ -6,7 +6,7 @@ from django import forms
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 
-from .forms import RecruitForm, AnswerFormSet, RecruitFormUpdate
+from .forms import RecruitForm, get_afs, RecruitFormUpdate
 from .models import Recruit, Sith, Answer, Question
 
 class IndexView(TemplateView):
@@ -28,7 +28,7 @@ def test_view(request, recruit_id):
     Страница отображения списка вопросов
     """
     if request.method == 'POST':
-        formset = AnswerFormSet(request.POST)
+        formset = get_afs()(request.POST)
         if formset.is_valid():
             for form in formset:
                 if form.cleaned_data:
@@ -43,7 +43,7 @@ def test_view(request, recruit_id):
                     answer.save()
             return render(request, 'orden/index.html')
 
-    formset = AnswerFormSet(queryset=Recruit.objects.all()[:0], initial=Question.objects.get_initial())
+    formset = get_afs()(queryset=Recruit.objects.all()[:0], initial=Question.objects.get_initial())
     questions = Question.objects.all()
     context = {'formset' : formset, 'questions' : questions}
     return render(request, 'orden/test.html', context)
