@@ -1,0 +1,48 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Тест{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {% if formset.non_form_errors %}
+            <ul>
+                {% for error in formset.non_form_errors %}
+                    <li><em>{{ error|escape }}</em></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% for form in formset %}
+            {% if form.non_field_errors %}
+                <ul>
+                    {% for error in form.non_field_errors %}
+                        <li><em>{{ error|escape }}</em></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% for field in form %}
+                {% if field.errors %}
+                    <ul>
+                        {% for error in field.errors %}
+                            <li><em>{{ error|escape }}</em></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if field.name == 'question' %}
+                    <p>{{ field.label_tag }} {{ field }}
+                    {% for question in questions %}
+                        {% if question.pk == field.value %}
+                            <b>{{ question.text }}</b>
+                        {% endif %}
+                    {% endfor %}
+                {% elif field.name == 'answer' %}
+                    {{ field.label_tag }} {{ field }}</p>
+                {% endif %}
+
+            {% endfor %}
+        {% endfor %}
+        <input type="submit" value="Сохранить">
+    </form>
+{% endblock %}

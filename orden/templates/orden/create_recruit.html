@@ -1,0 +1,12 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Создание рекрута{% endblock %}
+
+{% block content %}
+<h2>Введите данные рекрута</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value='Далее'>
+</form>
+{% endblock %}

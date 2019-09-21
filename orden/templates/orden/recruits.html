@@ -1,0 +1,24 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Для ситха{% endblock %}
+
+{% block content %}
+    <h2>Рекруты прошедшие тест, но еще не ставшие 'Рукой Тени'</h2>
+    {% if status == 'ERROR' %}
+        <h3>Достигнуто максимальное количество рук тени у данного Ситха</h3>
+    {% endif %}
+    {% for recruit_answers_form in recruits_answers_forms %}
+        <div>
+            <p><b>Ответы {{ recruit_answers_form|first }}</b></p>
+            {% for answer in recruit_answers_form|slice:'1:2'|first %}
+                <p>{{ answer.question }} {% if answer.answer == 'y' %} Да {% else %} Нет {% endif %}</p>
+            {% endfor %}
+            <form method="post">
+                {% csrf_token %}
+                {{ recruit_answers_form|last }}
+                <input type="submit" value="Назначить {{ recruit_answers_form|first }} 'Рукой Тени'">
+            </form>
+            <br>
+        </div>
+    {% endfor %}
+{% endblock %}

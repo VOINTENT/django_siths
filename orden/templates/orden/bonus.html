@@ -1,0 +1,16 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Бонус{% endblock %}
+
+{% block content %}
+    <h1>Бонус</h1>
+    <h3>Ситхи и количество их Рук Тени</h3>
+    {% for sith in siths_all %}
+        <p>{{ sith }} : {{ sith.count_h_s }}</p>
+    {% endfor %}
+
+    <h3>Ситхи, количество Рук Тени которых больше 1</h3>
+    {% for sith in siths_gt_1 %}
+        <p>{{ sith }} : {{ sith.count_h_s }}</p>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Для ситха{% endblock %}
+
+{% block content %}
+    <h1>Для ситха</h1>
+    <h2>Выберите себя</h2>
+    {% for sith in siths %}
+        <p><a href="{% url 'recruits_list_view' sith.pk  %}">{{ sith }}</a></p>
+    {% endfor %}
+{% endblock %}
