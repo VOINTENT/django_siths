@@ -57,6 +57,7 @@ class Sith(models.Model):
     name = models.CharField(max_length = 50, verbose_name = 'Имя')
     planet = models.ForeignKey('Planet', on_delete = models.PROTECT, verbose_name = 'Планета')
     count_h_s = models.PositiveSmallIntegerField(default = 0, verbose_name = 'Количество рук тени')
+    MAX_H_S = 3
 
     def __str__(self):
         return self.name
@@ -67,12 +68,15 @@ class Sith(models.Model):
 
     # Проверить количество Рук Тени Ситха, и увеличить, если оно меньше 3
     def inc_h_s(self):
-        if self.count_h_s < 3:
+        if self.count_h_s < self.MAX_H_S:
             self.count_h_s += 1
             self.save()
             return True
         else:
             return False
+
+    def max(self):
+        return self.count_h_s == self.MAX_H_S
 
 
 class Planet(models.Model):

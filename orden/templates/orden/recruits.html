@@ -4,7 +4,7 @@
 
 {% block content %}
     <h2>Рекруты прошедшие тест, но еще не ставшие 'Рукой Тени'</h2>
-    {% if status == 'ERROR' %}
+    {% if current_sith.max %}
         <h3>Достигнуто максимальное количество рук тени у данного Ситха</h3>
     {% endif %}
     {% for recruit_answers_form in recruits_answers_forms %}

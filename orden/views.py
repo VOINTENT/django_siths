@@ -86,8 +86,9 @@ def recruits_list_view(request, sith_id):
         rfu = RecruitFormUpdate(initial = {'id' : recruit.pk})
         forms.append(rfu)
 
+    current_sith = Sith.objects.get(pk=sith_id)
     recruits_answers_forms = zip(recruits, groops_answers, forms)
-    context = {'recruits_answers_forms': recruits_answers_forms}
+    context = {'recruits_answers_forms': recruits_answers_forms, 'current_sith' : current_sith}
 
     return render(request, 'orden/recruits.html', context)
 
